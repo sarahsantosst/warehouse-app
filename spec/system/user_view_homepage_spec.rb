@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuario visita tela inicial' do 
-  it  'e ve o nome do app' do 
+  it  'e vê o nome do app' do 
     #arrange
 
     #act
@@ -9,7 +9,41 @@ describe 'Usuario visita tela inicial' do
 
 
     #assert 
-    expect(page).to have_content('Galpoes & Estoque')
+    expect(page).to have_content('Galpões & Estoque')
   end
-end 
+
+    it 'e vê galpoes cadastrados' do
+    
+    Warehouse.create(name:'Rio' , code: 'SDU', city: 'Rio de Janeiro', area: 60_000)
+    Warehouse.create(name:'Maceio' , code: 'MCZ', city:'Maceio', area: 50_0000)
+
+    #act
+    visit('/')
+
+    #assert
+    expect(page).not_to have_content('não existem galpões cadastrados')
+    expect(page).to have_content( 'Rio')
+    expect(page).to have_content( 'Código: SDU')
+    expect(page).to have_content('Cidade: Rio de Janeiro')
+    expect(page).to have_content('60000 m2')
+
+    expect(page).to have_content( 'Maceio')
+    expect(page).to have_content( 'Código: MCZ')
+    expect(page).to have_content('Cidade: Rio de Janeiro')
+    expect(page).to have_content('60000 m2')
+    end 
+
+    it 'e não existem galpões cadastrados' do 
+
+      #arrange
+
+      #act
+      visit ('/')
+      #assert
+
+      expect(page).to have_content('não existem galpões cadastrados')
+    end 
+
+
+  end
 
