@@ -12,10 +12,11 @@ describe 'Usuario visita tela inicial' do
     expect(page).to have_content('Galpões & Estoque')
   end
 
-    it 'e vê galpoes cadastrados' do
+it 'e vê galpoes cadastrados' do
     
-    Warehouse.create(name:'Rio' , code: 'SDU', city: 'Rio de Janeiro', area: 60_000)
-    Warehouse.create(name:'Maceio' , code: 'MCZ', city:'Maceio', area: 50_0000)
+  Warehouse.create(name:'Rio' , code: 'SDU', city: 'Rio de Janeiro', area: 60_000, address: 'Av do Porto, 1000', cep: '20000-000', description:  'Galpão do Rio')
+  
+  Warehouse.create(name:'Maceio' , code: 'MCZ', city:'Maceio', area: 50_0000, address: 'Av Atlatica, 50', cep: '80000-000', description:  'Perto do Aeroporto')
 
     #act
     visit(root_path)
