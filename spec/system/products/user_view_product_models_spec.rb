@@ -1,12 +1,26 @@
 require 'rails_helper'
 
 describe 'Usuário vê modelos de produtos' do 
-  it 'a partir do menu' do 
-    #arrange
 
+  it  'se estiver autenticado' do 
+    #arrange
     #act
     visit root_path
-     within('nav') do
+    within('nav') do
+     click_on 'Modelos de Produtos'
+    end
+    #assert
+    expect(current_path).to eq new_user_session_path
+  end
+
+  it 'a partir do menu' do 
+    #arrange
+    user = User.create!(name: "Joao", email:'joao@email.com', password:
+      'password')
+    #act
+    login_as(user)
+    visit root_path
+    within('nav') do
       click_on 'Modelos de Produtos'
      end
     #assert
@@ -15,12 +29,14 @@ describe 'Usuário vê modelos de produtos' do
 
   it 'com sucesso' do 
     #arrange
+    user = User.create!(name: "Joao", email:'joao@email.com', password:
+      'password')
     supplier = Supplier.create(brand_name:'Samsung', corporate_name: 'Samsung Eletronicos LTDA', registration_number:'0984562341984', full_address:'Av Nacoes Unidas, 1000' , city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')  
 
     ProductModel.create!(name:'TV 32', weight: 8000, width: 70, height: 45, depth:10, sku:'TV 32-SAMSU-XPT090', supplier: supplier)
     ProductModel.create!(name:'SoundBar 7.1 Surround', weight: 3000, width: 80, height: 15, depth: 20, sku: 'SOU71-SAMSU-NOIZ77', supplier: supplier)
     #act
-
+    login_as(user)
     visit root_path
     within('nav') do
      click_on 'Modelos de Produtos'
@@ -33,12 +49,17 @@ describe 'Usuário vê modelos de produtos' do
     expect(page).to have_content 'SOU71-SAMSU-NOIZ77'
     expect(page).to have_content 'Samsung'
   end
+
   it  'e não existem produtos cadastrados' do
    #arrange
+   user = User.create!(name: "Joao", email:'joao@email.com', password:
+    'password')
    #act
+   login_as(user)
    visit root_path
    click_on 'Modelos de Produtos'
    #assert
-    expect(page).to have_content 'Nenhum modelo de produto cadastrado.'
+   expect(page).to have_content 'Nenhum modelo de produto cadastrado.'
   end
 end
+ 

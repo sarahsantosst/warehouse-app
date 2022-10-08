@@ -1,7 +1,9 @@
 class WarehousesController < ApplicationController
   before_action :set_warehouse, only: [:show, :edit, :update, :destroy]
 
-  def show; end
+  def show
+    @stocks = @warehouse.stock_products.group(:product_model).count
+  end
 
   def new
     @warehouse = Warehouse.new()
@@ -23,10 +25,9 @@ class WarehousesController < ApplicationController
   def update
      if @warehouse.update(warehouse_params)
       redirect_to warehouse_path(@warehouse.id), notice: 'Galpão atualizado com sucesso'
-
-  else
-    flash.now[:notice] = "Não foi possível atualizar o  galpão."
-    render 'edit'
+    else
+      flash.now[:notice] = "Não foi possível atualizar o  galpão."
+      render 'edit'
      end
   end
 

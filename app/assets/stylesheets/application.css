@@ -1,3 +1,132 @@
+html,
+body,
+button,
+ul {
+    width: 100%;
+    height: 100%;
+    font-family: 'DM Sans', sans-serif;
+    color: rgb(15, 1, 9); 
+
+}
+
+a {
+  font-size: 30px;
+}
+
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: center;
+  list-style: none;
+  margin: 42px 0;
+}
+
+ button {
+
+  border-bottom: 0.9rem;
+  border: none;
+  width: 16rem;
+  height: 48px;
+  margin: auto;
+  background-color: rgb(224, 220, 224);
+  border-radius: 0.7rem;
+  margin-bottom: 10px;
+}
+ button a {
+
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgb(167, 59, 167);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+td {
+  font-size: 29px;
+}
+
+button:hover {
+  
+  background-color: rgb(226, 186, 226);
+  border: none;
+  padding: 10px 38px;
+  transition-duration: 0.14s;
+  opacity: 0.9;
+  position: inherit;
+}
+
+
+
+header {
+background-color: rgb(187, 165, 171);
+text-align: center;
+font-size: 25.7px;
+}
+
+
+
+body p {
+    text-align: center;
+}
+
+main {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+h1 {
+  background-color: aliceblue;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+h3 {
+  font-size: 38px;
+}
+
+div {
+  text-align: center;
+}
+
+label {
+  font-size: 27px;
+}
+
+dl {
+  text-align: center;
+}
+
+a {
+  color: rgb(3, 17, 3);
+  text-decoration: none;
+}
+
+select {
+  font-size: 30px;
+}
+
+input {
+  text-align: center;
+  font-size: 25px;
+}
+
+
+
+
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
