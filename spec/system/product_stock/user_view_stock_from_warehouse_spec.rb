@@ -24,11 +24,40 @@ describe 'Usuário vê o estoque' do
   visit root_path
   click_on 'Aeroporto SP'
 
-   
   #assert
+  within("section#stock_products") do 
   expect(page).to have_content 'Itens em Estoque'
   expect(page).to have_content '3 x TV 32-SAMSU-XPT090'
   expect(page).to have_content '2 x NOTEI5-SAMSU-NOTLI99'
   expect(page).not_to have_content 'SOU71-SAMSU-NOIZ77'
+  end
+end
+
+  it 'e dá baixa em um item' do
+    #arrange
+    user = User.create!(name: 'Sarah', email:  'sarah@email.com', password: 'password')
+    w = Warehouse.create(name: 'Aeroporto SP', code:'GRU', city: 'São Paulo', area: 100_000, address: 'Avenida do Aeroporto, 1000', cep: '15000-000', description: 'Galpão destinado para cargas internacionais')
+
+    supplier = Supplier.create(brand_name:'Samsung', corporate_name: 'Samsung Eletronicos LTDA', registration_number:'0984562341984', full_address:'Av Nacoes Unidas, 1000' , city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')  
+
+    order = Order.create!(user: user, supplier: supplier, warehouse: w, estimated_delivery_date: 1.day.from_now)
+
+    produto_tv = ProductModel.create!(name:'TV 32', weight: 8000, width: 70, height: 45, depth:10, sku:'TV 32-SAMSU-XPT090', supplier: supplier)
+
+    2.times { StockProduct.create!(order: order, warehouse: w, product_model: produto_tv) }
+
+    #act
+    login_as(user)
+    visit root_path
+    click_on 'Aeroporto SP'
+    select 'TV 32-SAMSU-XPT090', from: 'Item para Saída'
+    fill_in 'Destinatário', with: 'Maria Ferreira'
+    fill_in  'Endereço Destino', with: 'Rua da Palmeiras, 100 - Campinas - São Paulo'
+    click_on 'Confirmar Retirada'
+
+    #assert
+    expect(current_path).to eq warehouse_path(w.id)
+    expect(page).to have_content 'Item retirado com sucesso'
+
   end
 end

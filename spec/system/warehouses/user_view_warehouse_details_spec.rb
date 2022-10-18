@@ -25,11 +25,11 @@ describe  'Usuário vê detalhes de um galpão' do
   w = Warehouse.create(name: 'Aeroporto SP', code:'GRU', city: 'São Paulo', area: 100_000, address: 'Avenida do Aeroporto, 1000', cep: '15000-000', description: 'Galpão destinado para cargas internacionais')
 
   #act
-visit (root_path)
-click_on 'Aeroporto SP'
-click_on 'Voltar'
-  #assert
+  visit (root_path)
+  click_on 'Aeroporto SP'
+  click_on 'Voltar'
+    #assert
 
-expect(current_path).to eq('/')
+  expect(current_path).to eq('/')
   end
 end

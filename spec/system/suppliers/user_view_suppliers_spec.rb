@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário vê fornecedores' do 
   it 'a partir do menu' do 
-    #arrange
-
+    
     #act
     visit root_path
     within('nav') do

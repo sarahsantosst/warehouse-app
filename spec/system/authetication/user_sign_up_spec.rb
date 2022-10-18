@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário se auntetica com sucesso' do 
+describe 'Usuário se auntetica' do 
   it 'com sucesso' do
     #arrange
   
